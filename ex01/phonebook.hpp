@@ -8,11 +8,16 @@
 
 using namespace std;
 
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define RESET "\033[0m"
+
 #define INIT_INDEX 99
 #define MAX_NBR_CONTACTS 8
 #define NBR_INFOS 5
 #define NBR_OPTIONS 3
-#define COLUMN_SIZE 10 
+#define COLUMN_SIZE 10
+#define DEBUG_MODE 0 
 
 class Contact{
 	public:

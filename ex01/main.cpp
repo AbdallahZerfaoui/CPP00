@@ -4,7 +4,7 @@
 
 int main()
 {
-	std::cout << "Welcome MASTER !!\n"; 
+	std::cout << GREEN << "Welcome MASTER !!\n" << RESET; 
 	// bool valid_command = false;
 	// bool book_open = true;
 
@@ -24,10 +24,10 @@ int main()
 			{
 				if (std::cin.eof())
 				{
-					std::cout << "Exiting...\n";
+					std::cout << RED << "Exiting...\n" << RESET;
 					return 1;
 				}
-				std::cout << "Invalid command. Please enter a valid command\n";
+				std::cout << RED <<"Invalid command. Please enter a valid command\n" << RESET;
 				continue;
 			}
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore the rest of the line
@@ -42,10 +42,22 @@ int main()
 		}
 		else if (command == "SEARCH")
 		{
+			if (phonebook.size == 0)
+			{
+				std::cout << RED << "No contacts to display.\n" << RESET;
+				continue;
+			}
 			phonebook.display_contactS();
 			std::cout << "Enter the index of the contact please:\n";
 			int index;
 			std::cin >> index;
+			if (cin.fail() || index < 0 || index >= MAX_NBR_CONTACTS)
+			{
+				std::cout << RED << "Invalid index. Please enter a valid index\n" << RESET;
+				std::cin.clear(); // clear the error flag
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore the rest of the line
+				continue;
+			}
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			// Contact contact = phonebook.search(index);
 			// std::cout << contact.first_name << "\n";

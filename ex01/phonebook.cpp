@@ -27,7 +27,8 @@ PhoneBook::PhoneBook(int n_contacts)
 	size = 0;
 	nbr_contacts_added = 0;
 	string file_name = "contacts.txt";
-	readContactsFromFile(*this, file_name, n_contacts);
+	if (DEBUG_MODE)
+		readContactsFromFile(*this, file_name, n_contacts);
 }
 
 void PhoneBook::addFromUser()

@@ -22,7 +22,7 @@ void display_array_V(string array[], int size)
 	}
 }
 
-void readContactsFromFile(PhoneBook &phonebook, const std::string &filename, int n_lines) 
+void readContactsFromFile(PhoneBook &phonebook, const std::string &filename, int n_lines) //TO: Should i keep it
 {
     std::ifstream file(filename.c_str());
 	
@@ -39,12 +39,15 @@ void readContactsFromFile(PhoneBook &phonebook, const std::string &filename, int
         std::istringstream iss(line);
         std::string infos[5];
 		idx_slot = phonebook.getIndex();
-		cout << idx_slot << '\n';
+		// cout << idx_slot << '\n';
         // Parse the line to extract the contact details
-        if (iss >> infos[0] >> infos[1] >> infos[2] >> infos[3] >> infos[4]) {
+        if (iss >> infos[0] >> infos[1] >> infos[2] >> infos[3] >> infos[4]) 
+		{
             Contact newContact(idx_slot, infos);
             phonebook.addContact(newContact);
-        } else {
+        } 
+		else 
+		{
             std::cerr << "Error parsing line: " << line << std::endl;
         }
 
