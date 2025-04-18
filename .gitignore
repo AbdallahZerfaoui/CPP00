@@ -1,0 +1,6 @@
+#general
+*.o
+*/*.o
+
+#ex00
+ex00/megaphone_v2.cpp
