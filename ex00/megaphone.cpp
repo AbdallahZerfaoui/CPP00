@@ -19,9 +19,9 @@ int main(int argc, char** argv) {
         }
 
         // Add a space between arguments (but not after the last one)
-        if (i < argc - 1) {
-            std::cout << " ";
-        }
+        // if (i < argc - 1) {
+        //     std::cout << " ";
+        // }
     }
 
     // Newline after all arguments are printed

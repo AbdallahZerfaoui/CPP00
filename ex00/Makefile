@@ -49,7 +49,7 @@ OBJECTS = $(SOURCES:.cpp=.o)
 
 # Default target: Build the executable
 # This is the rule executed when you just type 'make'
-all: $(TARGET)
+all: art $(TARGET)
 
 # Rule to link the executable
 # Depends on all object files
@@ -73,7 +73,26 @@ clean:
 fclean: clean
 	$(RM) $(TARGET)
 
-re: fclean all
+re: art fclean $(TARGET)
+
+art:
+	@echo "                                                                                                   "
+	@echo "        CCCCCCCCCCCCCPPPPPPPPPPPPPPPPP   PPPPPPPPPPPPPPPPP        000000000          000000000     "
+	@echo "     CCC::::::::::::CP::::::::::::::::P  P::::::::::::::::P     00:::::::::00      00:::::::::00   "
+	@echo "   CC:::::::::::::::CP::::::PPPPPP:::::P P::::::PPPPPP:::::P  00:::::::::::::00  00:::::::::::::00 "
+	@echo "  C:::::CCCCCCCC::::CPP:::::P     P:::::PPP:::::P     P:::::P0:::::::000:::::::00:::::::000:::::::0"
+	@echo " C:::::C       CCCCCC  P::::P     P:::::P  P::::P     P:::::P0::::::0   0::::::00::::::0   0::::::0"
+	@echo "C:::::C                P::::P     P:::::P  P::::P     P:::::P0:::::0     0:::::00:::::0     0:::::0"
+	@echo "C:::::C                P::::PPPPPP:::::P   P::::PPPPPP:::::P 0:::::0     0:::::00:::::0     0:::::0"
+	@echo "C:::::C                P:::::::::::::PP    P:::::::::::::PP  0:::::0 000 0:::::00:::::0 000 0:::::0"
+	@echo "C:::::C                P::::PPPPPPPPP      P::::PPPPPPPPP    0:::::0 000 0:::::00:::::0 000 0:::::0"
+	@echo "C:::::C                P::::P              P::::P            0:::::0     0:::::00:::::0     0:::::0"
+	@echo "C:::::C                P::::P              P::::P            0:::::0     0:::::00:::::0     0:::::0"
+	@echo " C:::::C       CCCCCC  P::::P              P::::P            0::::::0   0::::::00::::::0   0::::::0"
+	@echo "  C:::::CCCCCCCC::::CPP::::::PP          PP::::::PP          0:::::::000:::::::00:::::::000:::::::0"
+	@echo "   CC:::::::::::::::CP::::::::P          P::::::::P           00:::::::::::::00  00:::::::::::::00 "
+	@echo "     CCC::::::::::::CP::::::::P          P::::::::P             00:::::::::00      00:::::::::00   "
+	@echo "        CCCCCCCCCCCCCPPPPPPPPPP          PPPPPPPPPP               000000000          000000000     "
 
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re art
