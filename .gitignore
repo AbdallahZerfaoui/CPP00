@@ -1,6 +1,12 @@
 #general
 *.o
 */*.o
+.vscode
+*.dSYM
+.DS_Store
 
 #ex00
 ex00/megaphone_v2.cpp
+
+#ex01
+ex01/*.txt

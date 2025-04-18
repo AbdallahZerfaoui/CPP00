@@ -2,7 +2,6 @@
 #include <iostream>
 #include <cctype>
 
-
 int main()
 {
 	std::cout << "Welcome MASTER !!\n"; 
@@ -20,8 +19,18 @@ int main()
 		// we loop until we get a valid command
 		do
 		{
-			std::cin >> command; // we collect only the first word
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			// std::cin >> command; // we collect only the first word
+			if (!(std::cin >> command))
+			{
+				if (std::cin.eof())
+				{
+					std::cout << "Exiting...\n";
+					return 1;
+				}
+				std::cout << "Invalid command. Please enter a valid command\n";
+				continue;
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore the rest of the line
 			if (!isInArray(command, options, NBR_OPTIONS))
 				std::cout << "Invalid command. Please enter a valid command\n";
 

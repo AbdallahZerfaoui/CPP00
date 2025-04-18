@@ -16,12 +16,12 @@ using namespace std;
 
 class Contact{
 	public:
-		int 		index;
-		string first_name;
-		string last_name;
-		string nickname;
-		string phone_number;
-		string dark_secret;
+		int		index;
+		string	first_name;
+		string	last_name;
+		string	nickname;
+		string	phone_number;
+		string	dark_secret;
 
 		// Constructor
 		Contact(int index = INIT_INDEX, string infos[NBR_INFOS] = NULL);
@@ -49,4 +49,4 @@ void display_array_V(string array[], int size);
 void readContactsFromFile(PhoneBook &phonebook, const std::string &filename, int n_lines);
 void printFormatted(const std::string &str);
 
-#endif // PHONEBOOK_H
+#endif
