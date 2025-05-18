@@ -12,8 +12,8 @@ int main()
 	{
 		std::string options[] = {"ADD", "SEARCH", "EXIT"};
 		std::cout << "Please enter one of the following commands :\n";
-		display_array_V(options, NBR_OPTIONS);
-		
+		print_each_string_on_new_line(options, NBR_OPTIONS);
+
 		// we loop until we get a valid command
 		do
 		{
@@ -29,7 +29,7 @@ int main()
 			}
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore the rest of the line
 			if (!isInArray(command, options, NBR_OPTIONS))
-				std::cout << "Invalid command. Please enter a valid command\n";
+				std::cout << RED << "Invalid command. Please enter a valid command\n" << RESET;
 
 		} while (!isInArray(command, options, NBR_OPTIONS));
 

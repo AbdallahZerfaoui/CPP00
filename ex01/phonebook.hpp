@@ -14,11 +14,12 @@
 #define NBR_INFOS 5
 #define NBR_OPTIONS 3
 #define COLUMN_SIZE 10
-#define DEBUG_MODE 0 
+#define DEBUG_MODE 0
 
-class Contact {
+class Contact
+{
 	public:
-		int		index;
+		int			index;
 		std::string	first_name;
 		std::string	last_name;
 		std::string	nickname;
@@ -29,7 +30,8 @@ class Contact {
 		Contact(int index = INIT_INDEX, std::string infos[NBR_INFOS] = NULL);
 };
 
-class PhoneBook {
+class PhoneBook
+{
 	public:
 		Contact contacts_list[MAX_NBR_CONTACTS];
 		int size;
@@ -42,12 +44,14 @@ class PhoneBook {
 		void display_contact(int index);
 		int oldest_contact();
 		int getIndex();
+
+		// Constructor
 		PhoneBook(int n_contacts = MAX_NBR_CONTACTS);
 };
 
 // Helper functions
 bool isInArray(std::string command, std::string array[], int size);
-void display_array_V(std::string array[], int size);
+void print_each_string_on_new_line(std::string array[], int size);
 void readContactsFromFile(PhoneBook &phonebook, const std::string &filename, int n_lines);
 void printFormatted(const std::string &str);
 

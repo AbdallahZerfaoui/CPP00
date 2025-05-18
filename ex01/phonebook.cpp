@@ -33,6 +33,7 @@ PhoneBook::PhoneBook(int n_contacts)
 void PhoneBook::addFromUser()
 {
 	int index = getIndex();
+
 	const char *infos[] = {
 		"First name", 
 		"Last name", 
@@ -54,9 +55,10 @@ void PhoneBook::addFromUser()
 
 		answers[i] = answer;
 	}
+
 	Contact contact(index, answers);
 	contacts_list[index] = contact;
-	contacts_list[index].index = index; // only abdallah knows
+	// contacts_list[index].index = index; // only abdallah knows
 	size = (size + 1 >= MAX_NBR_CONTACTS) ? MAX_NBR_CONTACTS : size + 1;
 	nbr_contacts_added++;
 }
@@ -64,10 +66,52 @@ void PhoneBook::addFromUser()
 void PhoneBook::addContact(Contact new_contact)
 {
 	int slot_idx = getIndex();
+	bool is_full = (nbr_contacts_added >= MAX_NBR_CONTACTS);
+
 	contacts_list[slot_idx] = new_contact;
 	contacts_list[slot_idx].index = slot_idx;
-	size = (size + 1 >= MAX_NBR_CONTACTS) ? MAX_NBR_CONTACTS : size + 1;
+	size = is_full ? MAX_NBR_CONTACTS : size + 1;
 	nbr_contacts_added++;
+}
+
+Contact PhoneBook::search(int target_index)
+{
+	int i = 0;
+	while(contacts_list[i].index != target_index && 
+			i < MAX_NBR_CONTACTS &&
+			contacts_list[i].index != INIT_INDEX)
+	{	
+		i++;
+	}
+	Contact contact;
+	if (i == target_index){
+		contact = contacts_list[i];
+	}
+	return contact;
+}
+
+void PhoneBook::display_contactS()
+{
+	Contact target_contact;
+	for (int index = 0; index < size; index++) {
+		target_contact = contacts_list[index];
+		//first line
+		for (int i = 0; i < 4 * COLUMN_SIZE + 5; i++) {
+			std::cout << "-";
+		}
+		std::cout << '\n' << '|';
+		
+		// second line
+		std::cout << std::setw(10) << std::right << target_contact.index << '|';
+		printFormatted(target_contact.first_name);
+		printFormatted(target_contact.last_name);
+		printFormatted(target_contact.nickname); std::cout << '\n';
+	}
+	//third line
+	for (int i = 0; i < 4 * COLUMN_SIZE + 5; i++) {
+		std::cout << "-";
+	}
+	std::cout << '\n';
 }
 
 void PhoneBook::display_contact(int index)
@@ -95,29 +139,6 @@ void PhoneBook::display_contact(int index)
 	std::cout << '\n';
 }
 
-void PhoneBook::display_contactS()
-{
-	Contact target_contact;
-	for (int index = 0; index < size; index++) {
-		target_contact = contacts_list[index];
-		//first line
-		for (int i = 0; i < 4 * COLUMN_SIZE + 5; i++) {
-			std::cout << "-";
-		}
-		std::cout << '\n' << '|';
-		
-		// second line
-		std::cout << std::setw(10) << std::right << target_contact.index << '|';
-		printFormatted(target_contact.first_name);
-		printFormatted(target_contact.last_name);
-		printFormatted(target_contact.nickname); std::cout << '\n';
-	}
-	//third line
-	for (int i = 0; i < 4 * COLUMN_SIZE + 5; i++) {
-		std::cout << "-";
-	}
-	std::cout << '\n';
-}
 
 int PhoneBook::oldest_contact()
 {
@@ -128,24 +149,10 @@ int PhoneBook::oldest_contact()
 
 int PhoneBook::getIndex()
 {
-	int idx_contact = 
-		(nbr_contacts_added < MAX_NBR_CONTACTS) ? 
-			nbr_contacts_added : oldest_contact();
-	return idx_contact;
-}
+	bool is_full = (nbr_contacts_added >= MAX_NBR_CONTACTS);
 
-Contact PhoneBook::search(int target_index)
-{
-	int i = 0;
-	while(contacts_list[i].index != target_index && 
-			i < MAX_NBR_CONTACTS &&
-			contacts_list[i].index != INIT_INDEX)
-	{	
-		i++;
-	}
-	Contact contact;
-	if (i == target_index){
-		contact = contacts_list[i];
-	}
-	return contact;
+	int idx_contact =
+		is_full ? oldest_contact() : nbr_contacts_added;
+
+	return idx_contact;
 }
