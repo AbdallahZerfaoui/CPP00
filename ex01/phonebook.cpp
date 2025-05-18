@@ -25,8 +25,6 @@ PhoneBook::PhoneBook(int n_contacts):
 	size(0),
 	nbr_contacts_added(0)
 {
-	// size = 0;
-	// nbr_contacts_added = 0;
 	std::string file_name = "contacts.txt";
 	if (DEBUG_MODE)
 		readContactsFromFile(*this, file_name, n_contacts);
@@ -92,31 +90,42 @@ Contact PhoneBook::search(int target_index)
 	return contact;
 }
 
-void PhoneBook::display_contactS()
+/**
+ * Print the contacts infos in the short
+ * format when the user start a search
+ */
+void PhoneBook::displayContactS()
 {
 	Contact target_contact;
-	for (int index = 0; index < size; index++) {
+	for (int index = 0; index < size; index++)
+	{
 		target_contact = contacts_list[index];
+
 		//first line
-		for (int i = 0; i < 4 * COLUMN_SIZE + 5; i++) {
+		for (int i = 0; i < 4 * COLUMN_SIZE + 5; i++)
 			std::cout << "-";
-		}
+
 		std::cout << '\n' << '|';
 		
 		// second line
-		std::cout << std::setw(10) << std::right << target_contact.index << '|';
+		std::cout << std::setw(COLUMN_SIZE) << std::right << target_contact.index << '|';
 		printFormatted(target_contact.first_name);
 		printFormatted(target_contact.last_name);
 		printFormatted(target_contact.nickname); std::cout << '\n';
 	}
+
 	//third line
-	for (int i = 0; i < 4 * COLUMN_SIZE + 5; i++) {
+	for (int i = 0; i < 4 * COLUMN_SIZE + 5; i++)
 		std::cout << "-";
-	}
+	
 	std::cout << '\n';
 }
 
-void PhoneBook::display_contact(int index)
+/**
+ * Print the contact infos in the long
+ * format when the user select a specific contact
+ */
+void PhoneBook::displayContact(int index)
 {
 	Contact target_contact = search(index);
 

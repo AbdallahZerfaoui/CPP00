@@ -15,7 +15,7 @@ bool isInArray(std::string command, std::string array[], int size)
 	return false;
 }
 
-void print_each_string_on_new_line(std::string array[], int size)
+void printEachStringOnNewLine(std::string array[], int size)
 {
 	for (int i = 0; i < size; i++)
 		std::cout << array[i] << '\n';

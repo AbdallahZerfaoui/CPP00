@@ -40,8 +40,8 @@ class PhoneBook
 		void addFromUser();
 		void addContact(Contact new_contact);
 		Contact search(int index);
-		void display_contactS();
-		void display_contact(int index);
+		void displayContactS();
+		void displayContact(int index);
 		int oldest_contact();
 		int getIndex();
 
@@ -51,7 +51,7 @@ class PhoneBook
 
 // Helper functions
 bool isInArray(std::string command, std::string array[], int size);
-void print_each_string_on_new_line(std::string array[], int size);
+void printEachStringOnNewLine(std::string array[], int size);
 void readContactsFromFile(PhoneBook &phonebook, const std::string &filename, int n_lines);
 void printFormatted(const std::string &str);
 
