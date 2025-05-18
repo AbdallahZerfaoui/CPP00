@@ -129,27 +129,12 @@ void PhoneBook::displayContact(int index)
 {
 	Contact target_contact = search(index);
 
-	//first line
-	for (int i = 0; i < 5 * (COLUMN_SIZE + 1) + 1; i++)
-		std::cout << "-";
-
-	std::cout << '\n' << '|';
-	
-	// second line
-	// cout << setw(10) << right << target_contact.index << '|';
-	printFormatted(target_contact.first_name);
-	printFormatted(target_contact.last_name);
-	printFormatted(target_contact.nickname); 
-	printFormatted(target_contact.phone_number);
-	printFormatted(target_contact.dark_secret); std::cout << '\n';
-
-	//third line
-	for (int i = 0; i < 5 * (COLUMN_SIZE + 1) + 1; i++) {
-		std::cout << "-";
-	}
-	std::cout << '\n';
+	std::cout << "First name: " << target_contact.first_name << std::endl;
+	std::cout << "Last name: " << target_contact.last_name << std::endl;
+	std::cout << "Nickname: " << target_contact.nickname << std::endl;
+	std::cout << "Phone number: " << target_contact.phone_number << std::endl;
+	std::cout << "Dark secret: " << target_contact.dark_secret << std::endl;
 }
-
 
 int PhoneBook::oldest_contact()
 {
