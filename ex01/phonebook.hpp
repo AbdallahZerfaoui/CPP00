@@ -2,16 +2,13 @@
 #define PHONEBOOK_H
 
 #include <string>
-#include <limits>
-#include <exception>
 
-
-using namespace std;
-
+// Colors
 #define RED "\033[31m"
 #define GREEN "\033[32m"
 #define RESET "\033[0m"
 
+// Constants
 #define INIT_INDEX 99
 #define MAX_NBR_CONTACTS 8
 #define NBR_INFOS 5
@@ -19,17 +16,17 @@ using namespace std;
 #define COLUMN_SIZE 10
 #define DEBUG_MODE 0 
 
-class Contact{
+class Contact {
 	public:
 		int		index;
-		string	first_name;
-		string	last_name;
-		string	nickname;
-		string	phone_number;
-		string	dark_secret;
+		std::string	first_name;
+		std::string	last_name;
+		std::string	nickname;
+		std::string	phone_number;
+		std::string	dark_secret;
 
 		// Constructor
-		Contact(int index = INIT_INDEX, string infos[NBR_INFOS] = NULL);
+		Contact(int index = INIT_INDEX, std::string infos[NBR_INFOS] = NULL);
 };
 
 class PhoneBook {
@@ -45,12 +42,12 @@ class PhoneBook {
 		void display_contact(int index);
 		int oldest_contact();
 		int getIndex();
-		PhoneBook(int n_contacts = 3);
+		PhoneBook(int n_contacts = MAX_NBR_CONTACTS);
 };
 
 // Helper functions
-bool isInArray(string command, string array[], int size);
-void display_array_V(string array[], int size);
+bool isInArray(std::string command, std::string array[], int size);
+void display_array_V(std::string array[], int size);
 void readContactsFromFile(PhoneBook &phonebook, const std::string &filename, int n_lines);
 void printFormatted(const std::string &str);
 

@@ -2,15 +2,14 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <cctype>
-#include <limits>
 
-// getline(cin, answer);: Reads the entire line, including spaces.
-// cin >> answer;: Only reads up to the first space.
-// a string literal like "apple" is const char * and not char *
+/**
+getline(cin, answer);: Reads the entire line, including spaces.
+cin >> answer;: Only reads up to the first space.
+a string literal like "apple" is const char * and not char *
+**/
 
-
-Contact::Contact(int index, string infos[])
+Contact::Contact(int index, std::string infos[])
 {
 	this->index = index;
 
@@ -26,7 +25,7 @@ PhoneBook::PhoneBook(int n_contacts)
 {
 	size = 0;
 	nbr_contacts_added = 0;
-	string file_name = "contacts.txt";
+	std::string file_name = "contacts.txt";
 	if (DEBUG_MODE)
 		readContactsFromFile(*this, file_name, n_contacts);
 }
@@ -42,41 +41,28 @@ void PhoneBook::addFromUser()
 		"Dark secret",
 		NULL};
 
-	string answers[NBR_INFOS];
+	std::string answers[NBR_INFOS];
 
-	cout << "Please enter the infos of your new contact" << "\n";
+	std::cout << "Please enter the infos of your new contact" << "\n";
 	
 	for (int i = 0; infos[i] != NULL; i++)
 	{
-		cout << infos[i] << ":\n";
-		string answer;
-		// Clear the input buffer in case there's any leftover characters
-        // cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		getline(cin, answer);
+		std::cout << infos[i] << ":\n";
+		std::string answer;
+
+		getline(std::cin, answer);
 
 		answers[i] = answer;
-		
-		// string info = infos[i];
 	}
 	Contact contact(index, answers);
 	contacts_list[index] = contact;
 	contacts_list[index].index = index; // only abdallah knows
-	// index == (index + 1) % MAX_NBR_CONTACTS;
 	size = (size + 1 >= MAX_NBR_CONTACTS) ? MAX_NBR_CONTACTS : size + 1;
 	nbr_contacts_added++;
 }
 
 void PhoneBook::addContact(Contact new_contact)
 {
-	// if (size < MAX_NBR_CONTACTS) {
-	// 	contacts_list[size] = new_contact;
-	// 	contacts_list[size].index = size;
-	// 	size = (size + 1 >= MAX_NBR_CONTACTS) ? MAX_NBR_CONTACTS : size + 1;
-	// }
-	// else {
-	// 	int idx_oldest = oldest_contact();
-	// 	contacts_list[idx_oldest] = new_contact;
-	// }
 	int slot_idx = getIndex();
 	contacts_list[slot_idx] = new_contact;
 	contacts_list[slot_idx].index = slot_idx;
@@ -87,11 +73,12 @@ void PhoneBook::addContact(Contact new_contact)
 void PhoneBook::display_contact(int index)
 {
 	Contact target_contact = search(index);
+
 	//first line
-	for (int i = 0; i < 5 * (COLUMN_SIZE + 1) + 1; i++) {
-		cout << "-";
-	}
-	cout << '\n' << '|';
+	for (int i = 0; i < 5 * (COLUMN_SIZE + 1) + 1; i++)
+		std::cout << "-";
+
+	std::cout << '\n' << '|';
 	
 	// second line
 	// cout << setw(10) << right << target_contact.index << '|';
@@ -99,13 +86,13 @@ void PhoneBook::display_contact(int index)
 	printFormatted(target_contact.last_name);
 	printFormatted(target_contact.nickname); 
 	printFormatted(target_contact.phone_number);
-	printFormatted(target_contact.dark_secret); cout << '\n';
+	printFormatted(target_contact.dark_secret); std::cout << '\n';
 
 	//third line
 	for (int i = 0; i < 5 * (COLUMN_SIZE + 1) + 1; i++) {
-		cout << "-";
+		std::cout << "-";
 	}
-	cout << '\n';
+	std::cout << '\n';
 }
 
 void PhoneBook::display_contactS()
@@ -115,21 +102,21 @@ void PhoneBook::display_contactS()
 		target_contact = contacts_list[index];
 		//first line
 		for (int i = 0; i < 4 * COLUMN_SIZE + 5; i++) {
-			cout << "-";
+			std::cout << "-";
 		}
-		cout << '\n' << '|';
+		std::cout << '\n' << '|';
 		
 		// second line
-		cout << setw(10) << right << target_contact.index << '|';
+		std::cout << std::setw(10) << std::right << target_contact.index << '|';
 		printFormatted(target_contact.first_name);
 		printFormatted(target_contact.last_name);
-		printFormatted(target_contact.nickname); cout << '\n';
+		printFormatted(target_contact.nickname); std::cout << '\n';
 	}
 	//third line
 	for (int i = 0; i < 4 * COLUMN_SIZE + 5; i++) {
-		cout << "-";
+		std::cout << "-";
 	}
-	cout << '\n';
+	std::cout << '\n';
 }
 
 int PhoneBook::oldest_contact()
