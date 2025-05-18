@@ -36,14 +36,12 @@ RM = rm -f
 # -g         : Generate debugging information
 CXXFLAGS = -std=c++17 -Wall -Wextra -Werror -g
 
-# Linker flags (if any, e.g., -lm for math library)
-# LDFLAGS =
-
 # Name of the final executable
 TARGET = megaphone
 
 # Find all .cpp files in the current directory
 SOURCES = megaphone.cpp
+
 # Generate corresponding object file names (replace .cpp with .o)
 OBJECTS = $(SOURCES:.cpp=.o)
 
@@ -74,6 +72,13 @@ fclean: clean
 	$(RM) $(TARGET)
 
 re: art fclean $(TARGET)
+
+run: re
+	@echo "${GREEN}Running $(TARGET)...${RESET}"
+	./$(TARGET) "shhhhh... I think the students are asleep..."
+	./$(TARGET) Damnit " ! " "Sorry students, I thought this thing was off."
+	./$(TARGET) "I am not a robot"
+	./$(TARGET)
 
 art:
 	@echo "                                                                                                   "

@@ -4,6 +4,7 @@
 .vscode
 *.dSYM
 .DS_Store
+hello.cpp
 
 #ex00
 ex00/megaphone_v2.cpp
