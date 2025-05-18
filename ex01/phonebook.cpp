@@ -21,10 +21,12 @@ Contact::Contact(int index, std::string infos[])
 
 }
 
-PhoneBook::PhoneBook(int n_contacts)
+PhoneBook::PhoneBook(int n_contacts):
+	size(0),
+	nbr_contacts_added(0)
 {
-	size = 0;
-	nbr_contacts_added = 0;
+	// size = 0;
+	// nbr_contacts_added = 0;
 	std::string file_name = "contacts.txt";
 	if (DEBUG_MODE)
 		readContactsFromFile(*this, file_name, n_contacts);

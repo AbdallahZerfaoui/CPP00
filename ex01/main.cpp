@@ -48,7 +48,8 @@ int main()
 			std::cout << "Enter the index of the contact please:\n";
 			int index;
 			std::cin >> index;
-			if (std::cin.fail() || index < 0 || index >= MAX_NBR_CONTACTS)
+			if (std::cin.fail() || index < 0 
+				|| index >= phonebook.size || index >= MAX_NBR_CONTACTS)
 			{
 				std::cout << RED << "Invalid index. Please enter a valid index\n" << RESET;
 				std::cin.clear(); // clear the error flag
