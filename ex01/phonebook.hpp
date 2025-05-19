@@ -1,48 +1,39 @@
 #ifndef PHONEBOOK_H
-#define PHONEBOOK_H
+# define PHONEBOOK_H
 
-#include <string>
+# include "contact.hpp"
+# include "constants.hpp"
+# include <string>
 
 // Colors
-#define RED "\033[31m"
-#define GREEN "\033[32m"
-#define RESET "\033[0m"
-
-// Constants
-#define INIT_INDEX 99
-#define MAX_NBR_CONTACTS 8
-#define NBR_INFOS 5
-#define NBR_OPTIONS 3
-#define COLUMN_SIZE 10
-#define DEBUG_MODE 0
-
-class Contact
-{
-	public:
-		int			index;
-		std::string	first_name;
-		std::string	last_name;
-		std::string	nickname;
-		std::string	phone_number;
-		std::string	dark_secret;
-
-		// Constructor
-		Contact(int index = INIT_INDEX, std::string infos[NBR_INFOS] = NULL);
-};
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define RESET "\033[0m"
 
 class PhoneBook
 {
-	public:
+	private:
 		Contact contacts_list[MAX_NBR_CONTACTS];
-		int size;
-		int nbr_contacts_added;
+		int _size;
+		int _nbr_contacts_added;
 
+		int oldest_contact();
+
+	public:
+		// Getters
+		int getSize() const;
+		int getNbrContactsAdded() const;
+
+		// Setters
+		void setSize(int size);
+		void setNbrContactsAdded(int nbr_contacts_added);
+
+		// Methods
 		void addFromUser();
 		void addContact(Contact new_contact);
 		Contact search(int index);
 		void displayContactS();
 		void displayContact(int index);
-		int oldest_contact();
 		int getIndex();
 
 		// Constructor

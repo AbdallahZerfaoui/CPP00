@@ -9,21 +9,18 @@ cin >> answer;: Only reads up to the first space.
 a string literal like "apple" is const char * and not char *
 **/
 
-Contact::Contact(int index, std::string infos[])
-{
-	this->index = index;
+// Getters
+int PhoneBook::getSize() const { return _size; }
+int PhoneBook::getNbrContactsAdded() const { return _nbr_contacts_added; }
 
-	first_name = (infos == NULL) ? "" : infos[0];
-	last_name = (infos == NULL) ? "" : infos[1];
-	nickname = (infos == NULL) ? "" : infos[2];
-	phone_number = (infos == NULL) ? "" : infos[3];
-	dark_secret = (infos == NULL) ? "" : infos[4];
+// Setters
+void PhoneBook::setSize(int size) { _size = size; }
+void PhoneBook::setNbrContactsAdded(int nbr_contacts_added) { _nbr_contacts_added = nbr_contacts_added; }
 
-}
-
+// Constructor
 PhoneBook::PhoneBook(int n_contacts):
-	size(0),
-	nbr_contacts_added(0)
+	_size(0),
+	_nbr_contacts_added(0)
 {
 	std::string file_name = "contacts.txt";
 	if (DEBUG_MODE)
@@ -59,27 +56,27 @@ void PhoneBook::addFromUser()
 	Contact contact(index, answers);
 	contacts_list[index] = contact;
 	// contacts_list[index].index = index; // only abdallah knows
-	size = (size + 1 >= MAX_NBR_CONTACTS) ? MAX_NBR_CONTACTS : size + 1;
-	nbr_contacts_added++;
+	_size = (_size + 1 >= MAX_NBR_CONTACTS) ? MAX_NBR_CONTACTS : _size + 1;
+	_nbr_contacts_added++;
 }
 
 void PhoneBook::addContact(Contact new_contact)
 {
 	int slot_idx = getIndex();
-	bool is_full = (nbr_contacts_added >= MAX_NBR_CONTACTS);
+	bool is_full = (_nbr_contacts_added >= MAX_NBR_CONTACTS);
 
 	contacts_list[slot_idx] = new_contact;
-	contacts_list[slot_idx].index = slot_idx;
-	size = is_full ? MAX_NBR_CONTACTS : size + 1;
-	nbr_contacts_added++;
+	contacts_list[slot_idx].setIndex(slot_idx);
+	_size = is_full ? MAX_NBR_CONTACTS : _size + 1;
+	_nbr_contacts_added++;
 }
 
 Contact PhoneBook::search(int target_index)
 {
 	int i = 0;
-	while(contacts_list[i].index != target_index && 
+	while(contacts_list[i].getIndex() != target_index && 
 			i < MAX_NBR_CONTACTS &&
-			contacts_list[i].index != INIT_INDEX)
+			contacts_list[i].getIndex() != INIT_INDEX)
 	{	
 		i++;
 	}
@@ -97,7 +94,7 @@ Contact PhoneBook::search(int target_index)
 void PhoneBook::displayContactS()
 {
 	Contact target_contact;
-	for (int index = 0; index < size; index++)
+	for (int index = 0; index < _size; index++)
 	{
 		target_contact = contacts_list[index];
 
@@ -108,10 +105,10 @@ void PhoneBook::displayContactS()
 		std::cout << '\n' << '|';
 		
 		// second line
-		std::cout << std::setw(COLUMN_SIZE) << std::right << target_contact.index << '|';
-		printFormatted(target_contact.first_name);
-		printFormatted(target_contact.last_name);
-		printFormatted(target_contact.nickname); std::cout << '\n';
+		std::cout << std::setw(COLUMN_SIZE) << std::right << target_contact.getIndex() << '|';
+		printFormatted(target_contact.getFirstName());
+		printFormatted(target_contact.getLastName());
+		printFormatted(target_contact.getNickName()); std::cout << '\n';
 	}
 
 	//third line
@@ -129,26 +126,26 @@ void PhoneBook::displayContact(int index)
 {
 	Contact target_contact = search(index);
 
-	std::cout << "First name: " << target_contact.first_name << std::endl;
-	std::cout << "Last name: " << target_contact.last_name << std::endl;
-	std::cout << "Nickname: " << target_contact.nickname << std::endl;
-	std::cout << "Phone number: " << target_contact.phone_number << std::endl;
-	std::cout << "Dark secret: " << target_contact.dark_secret << std::endl;
+	std::cout << "First name: " << target_contact.getFirstName() << std::endl;
+	std::cout << "Last name: " << target_contact.getLastName() << std::endl;
+	std::cout << "Nickname: " << target_contact.getNickName() << std::endl;
+	std::cout << "Phone number: " << target_contact.getPhoneNumber() << std::endl;
+	std::cout << "Dark secret: " << target_contact.getDarkSecret() << std::endl;
 }
 
 int PhoneBook::oldest_contact()
 {
 	int idx_oldest_contact = 
-		(nbr_contacts_added <= MAX_NBR_CONTACTS) ? 0 : nbr_contacts_added - MAX_NBR_CONTACTS;
+		(_nbr_contacts_added <= MAX_NBR_CONTACTS) ? 0 : _nbr_contacts_added - MAX_NBR_CONTACTS;
 	return idx_oldest_contact;
 }
 
 int PhoneBook::getIndex()
 {
-	bool is_full = (nbr_contacts_added >= MAX_NBR_CONTACTS);
+	bool is_full = (_nbr_contacts_added >= MAX_NBR_CONTACTS);
 
 	int idx_contact =
-		is_full ? oldest_contact() : nbr_contacts_added;
+		is_full ? oldest_contact() : _nbr_contacts_added;
 
 	return idx_contact;
 }

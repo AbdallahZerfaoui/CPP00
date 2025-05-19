@@ -39,7 +39,7 @@ int main()
 		}
 		else if (command == "SEARCH")
 		{
-			if (phonebook.size == 0)
+			if (phonebook.getSize() == 0)
 			{
 				std::cout << RED << "No contacts to display.\n" << RESET;
 				continue;
@@ -49,7 +49,7 @@ int main()
 			int index;
 			std::cin >> index;
 			if (std::cin.fail() || index < 0 
-				|| index >= phonebook.size || index >= MAX_NBR_CONTACTS)
+				|| index >= phonebook.getSize() || index >= MAX_NBR_CONTACTS)
 			{
 				std::cout << RED << "Invalid index. Please enter a valid index\n" << RESET;
 				std::cin.clear(); // clear the error flag
