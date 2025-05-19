@@ -43,7 +43,7 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -Werror -g
 TARGET = phonebook
 
 # Find all .cpp files in the current directory
-SOURCES = main.cpp phonebook.cpp utils.cpp
+SOURCES = main.cpp contact.cpp phonebook.cpp utils.cpp
 # Generate corresponding object file names (replace .cpp with .o)
 OBJECTS = $(SOURCES:.cpp=.o)
 
