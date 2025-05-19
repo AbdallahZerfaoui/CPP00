@@ -18,18 +18,10 @@ void Contact::setPhoneNumber(std::string phoneNumber) { _phoneNumber = phoneNumb
 void Contact::setDarkSecret(std::string darkSecret) { _darkSecret = darkSecret; }
 
 // Constructors
-Contact::Contact(): _firstName(""), _lastName(""), _nickName(""), _phoneNumber(""), _darkSecret("") {
-	this->_index = INIT_INDEX; 
-}
-
-Contact::Contact(int index, std::string infos[])
-{
-	this->_index = index;
-
-	_firstName = (infos == NULL) ? "" : infos[0];
-	_lastName = (infos == NULL) ? "" : infos[1];
-	_nickName = (infos == NULL) ? "" : infos[2];
-	_phoneNumber = (infos == NULL) ? "" : infos[3];
-	_darkSecret = (infos == NULL) ? "" : infos[4];
-
-}
+Contact::Contact(int index, const std::string infos[]):
+    _index(index),
+    _firstName(infos ? infos[0] : ""),
+    _lastName(infos ? infos[1] : ""),
+    _nickName(infos ? infos[2] : ""),
+    _phoneNumber(infos ? infos[3] : ""),
+    _darkSecret(infos ? infos[4] : "") {}

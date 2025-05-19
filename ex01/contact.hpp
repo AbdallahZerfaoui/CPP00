@@ -33,8 +33,7 @@ class Contact
 		void		setDarkSecret(std::string darkSecret);
 
 		// Constructor
-		Contact();
-		Contact(int index = INIT_INDEX, std::string infos[NBR_INFOS] = NULL);
+		Contact(int index = INIT_INDEX, const std::string infos[NBR_INFOS] = NULL);
 };
 
 #endif
